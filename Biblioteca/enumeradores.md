@@ -1,4 +1,4 @@
-Enumeradores visam representar tipos. Ou seja , em determinado estudo de caso percebo que um livro pode possuir difeentes tipo de genero (ficção , aventura , romance). Portanto é bom conteto para usar um enum.
+Enumeradores visam representar tipos. Ou seja , em determinado estudo de caso percebo que um livro pode possuir diferentes tipos de generos (ficção , aventura , romance). Portanto é bom contexto para usar um enum.
 Declaração de um enum com construtror e métodos get
 ```
 public enum GeneroLivro {
