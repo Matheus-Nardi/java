@@ -1,6 +1,6 @@
 ## O projeto Biblioteca visa a utilização do enum para cadastro de livros.
 Enumeradores visam representar tipos. Ou seja , em determinado estudo de caso percebo que um livro pode possuir diferentes tipos de generos (ficção , aventura , romance). Portanto é bom contexto para usar um enum.
-n\Declaração de um enum com construtror e métodos get
+\nDeclaração de um enum com construtror e métodos get
 ```
 public enum GeneroLivro {
 	FICÇÃO(1, "Ficação"), NÃOFICÇÃO(2, "Não ficção"), ROMANCE(3, "Romance"), AVENTURA(4, "Aventura"),
