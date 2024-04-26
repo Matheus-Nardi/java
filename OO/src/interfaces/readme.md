@@ -7,7 +7,7 @@ Isso permite o desacoplamento das classes e possibilita que determinadas classes
 Nas interfaces, é possível declarar métodos sem corpo, ou seja, abstratos, e métodos default, que permitem corpo e não obrigam as classes implementadoras a utilizá-los.
 
 Exemplo: 
-```
+```java
 public interface DataLoder {
 	
 	int MAX_DATA_SIZE = 10; // declaracao de atriutos que são static e do tipo final
