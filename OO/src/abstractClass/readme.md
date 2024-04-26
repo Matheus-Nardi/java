@@ -10,7 +10,7 @@ Também há a possibilidade de métodos abstratos, os quais só podem estar em c
 Existem também os métodos abstratos com a palavra reservada `default`, os quais serão explicados em Interfaces.
 
 Exemplo de uma classe abstrata:
-```
+```java
 public abstract class Funcionario {
 
 	private String nome;
