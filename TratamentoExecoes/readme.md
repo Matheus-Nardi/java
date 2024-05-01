@@ -6,7 +6,6 @@ Exceções do tipo checked: São "erros" que requerem tratamento obrigatório ou
 O tratamento de exceções é essencial quando precisamos executar um código suscetível a erros que podem interromper o fluxo do programa de maneira abrupta.
 
 ```java
-Copy code
 try {
     // Código suscetível a exceções
     // ...
@@ -30,7 +29,6 @@ Uma boa prática é capturar exceções mais específicas antes das mais genéri
 Além disso, o lançamento de exceções, seja dentro de um método ou em sua assinatura, permite que quem chama o método saiba que tipo de exceção esperar e como lidar com ela.
 
 ```java
-Copy code
 private static int divisao(int a, int b) throws IllegalArgumentException {
     if(b == 0) {
         throw new IllegalArgumentException("Argumento ilegal"); // Lançando uma exceção
