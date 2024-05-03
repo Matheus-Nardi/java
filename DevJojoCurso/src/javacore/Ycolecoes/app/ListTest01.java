@@ -23,7 +23,9 @@ public class ListTest01 {
 		for (String nome : nomes) {
 			System.out.println(nome);
 		}
+		
 		nomes.addAll(nomes2);
+		
 		System.out.println("-----------------");
 		
 		for (int i = 0; i < nomes.size(); i++) {
