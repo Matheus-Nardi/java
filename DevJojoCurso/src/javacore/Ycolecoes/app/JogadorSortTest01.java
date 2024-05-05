@@ -2,10 +2,20 @@ package javacore.Ycolecoes.app;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javacore.Ycolecoes.models.Jogador;
 
+//Comparator usado quando em determinado momento eu quero fugir da ordenação padrão
+ class JogadorByIdComparator implements Comparator<Jogador>{
+
+	@Override
+	public int compare(Jogador jogador1, Jogador jogador2) {
+		return jogador1.getId().compareTo(jogador2.getId());
+	}
+	
+}
 public class JogadorSortTest01 {
 	public static void main(String[] args) {
 		List<Jogador> jogadores = new ArrayList<>();
@@ -19,7 +29,16 @@ public class JogadorSortTest01 {
 
 		Collections.sort(jogadores);
 
-		System.out.println("-----------");
+		System.out.println("----BY NAME----");
+		for (Jogador jogador : jogadores) {
+			System.out.println(jogador);
+		}
+		
+
+		Collections.sort(jogadores  ,new JogadorByIdComparator());
+		//jogadores.sort(new  JogadorByIdComparator());
+
+		System.out.println("----BY ID----");
 		for (Jogador jogador : jogadores) {
 			System.out.println(jogador);
 		}
