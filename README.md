@@ -10,3 +10,6 @@ Um simples repositório que visa documentar o processo de aprendizado em java.
 -[Interfaces](OO/src/interfaces/readme.md)
 
 -[Polimorfismo](OO/src/polimorfismo/readme.md)
+
+-Coleções
+  - [Listas](DevJojoCurso/src/javacore/Ycolecoes/readme.md)
