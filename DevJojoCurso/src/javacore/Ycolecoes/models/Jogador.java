@@ -6,6 +6,7 @@ public class Jogador implements Comparable<Jogador> {
 	private Integer id;
 	private String nome;
 	private Integer numeroCamisa;
+	private Integer numeroGols;
 
 	public Jogador(Integer id, String nome, Integer numeroCamisa) {
 		super();
@@ -15,6 +16,15 @@ public class Jogador implements Comparable<Jogador> {
 		this.nome = nome;
 		this.numeroCamisa = numeroCamisa;
 	}
+	
+	
+
+	public Jogador(Integer id, String nome, Integer numeroCamisa, Integer numeroGols) {
+		this(id, nome, numeroCamisa);
+		this.numeroGols = numeroGols;
+	}
+
+
 
 	@Override
 	public String toString() {
