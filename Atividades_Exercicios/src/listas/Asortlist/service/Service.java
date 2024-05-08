@@ -32,9 +32,9 @@ public class Service {
 
 		filmes.add(filme);
 	}
-	
+
 	public static void alterarFilme() {
-		
+
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Qual filme voce deseja alterar ?");
 		mostrarFilmes();
@@ -55,9 +55,9 @@ public class Service {
 		System.out.print("Informe a classificao indicativa: ");
 		ClassificaoIndicativa.mostrarClassificao();
 		filmeAlterado.setClassificao(ClassificaoIndicativa.valueOf(scan.nextInt()));
-		
+
 		filmes.add(index, filmeAlterado);
-		
+
 		mostrarFilmes();
 	}
 
@@ -100,5 +100,3 @@ public class Service {
 	}
 
 }
-
-

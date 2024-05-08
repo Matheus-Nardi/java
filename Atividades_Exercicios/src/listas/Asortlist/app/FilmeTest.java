@@ -7,7 +7,6 @@ import listas.Asortlist.service.Service;
 public class FilmeTest {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		int opFiltro;
 		int op;
 		do {
 			FilmeTest.menu();
