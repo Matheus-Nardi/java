@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javacore.Ycolecoes.models.Consumidor;
+import javacore.Ycolecoes.models.Jogador;
 import javacore.Ycolecoes.models.Manga;
 
 public class MapTest3 {
@@ -21,12 +22,10 @@ public class MapTest3 {
 		Manga manga4 = new Manga("Blue lock", 7.45, 0);
 
 		List<Manga> mangaConsumidor1 = List.of(manga1, manga2, manga3);
-		List<Manga> mangaConsumidor2 = new  ArrayList<Manga>(Arrays.asList(manga3, manga4));
-		
+		List<Manga> mangaConsumidor2 = new ArrayList<Manga>(Arrays.asList(manga3, manga4));
+
 		mangaConsumidor2.add(manga1);
-		
-		
-		
+
 		Map<Consumidor, List<Manga>> map = new HashMap<Consumidor, List<Manga>>();
 		map.put(consumidor1, mangaConsumidor1);
 		map.put(consumidor2, mangaConsumidor2);
