@@ -8,6 +8,28 @@ public class Consumidor {
 	private String nome;
 	
 	
+	
+	
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+	public String getNome() {
+		return nome;
+	}
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
 	public Consumidor( String nome) {
 		super();
 		this.id = ThreadLocalRandom.current().nextInt(0,1000);  //Criação de ids automatico
