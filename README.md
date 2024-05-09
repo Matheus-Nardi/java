@@ -13,4 +13,7 @@ Um simples repositório que visa documentar o processo de aprendizado em java.
 
 -Coleções
   - [Listas](DevJojoCurso/src/javacore/Ycolecoes/readme.md)
+  - [Set] (DevJojoCurso/src/javacore/Ycolecoes/reamdeSet.md)
   - [Mapa](DevJojoCurso/src/javacore/Ycolecoes/readmeMap.md)
+  - [Fila](DevJojoCurso/src/javacore/Ycolecoes/readmeQueue.md)
+    
