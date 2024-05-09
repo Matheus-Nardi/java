@@ -1,7 +1,7 @@
 # Trilha de Estudos em Java
 
 ## Introdução
-Um simples repositório que visa documentar o processo de aprendizado em java.
+Um simples repositório que visa documentar o processo de aprendizado em java para além do proposto pela faculdade.
 ## Índice
 -[Enumeradores](Biblioteca/enumeradores.md)
 
