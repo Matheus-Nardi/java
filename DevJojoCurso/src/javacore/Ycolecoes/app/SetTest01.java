@@ -17,6 +17,7 @@ public class SetTest01 {
 		mangas.add(new Manga("Blue lock", 7.45, 0));
 		mangas.add(new Manga("Blue lock", 7.45, 0));
 		
+		
 		for (Manga manga : mangas) {
 			System.out.println(manga);
 		}

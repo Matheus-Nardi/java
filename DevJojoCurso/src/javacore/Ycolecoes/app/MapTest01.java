@@ -1,7 +1,8 @@
 package javacore.Ycolecoes.app;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class MapTest01 {
@@ -15,6 +16,7 @@ public class MapTest01 {
 		map.put(3, "CE");
 		map.put(4, "AM");
 		map.putIfAbsent(4, "RS");
+		System.out.println(map.get(3));
 		
 		System.out.println(map);
 		
@@ -30,6 +32,7 @@ public class MapTest01 {
 		for (Map.Entry<Integer, String> keyValue : map.entrySet() ) {
 			System.out.println("Chave: " + keyValue.getKey() + " - Valor: " + keyValue.getValue());
 		}
+		
 		
 	}
 }
