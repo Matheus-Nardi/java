@@ -3,7 +3,7 @@ package map.model;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Aluno {
+public class Aluno implements Comparable<Aluno> {
 	private Integer numeroMatricula;
 	private Double[] notas;
 
@@ -57,6 +57,12 @@ public class Aluno {
 	@Override
 	public String toString() {
 		return "Aluno Matricula=" + numeroMatricula + ", Notas=" + Arrays.toString(notas);
+	}
+
+
+	@Override
+	public int compareTo(Aluno o) {
+		return this.numeroMatricula.compareTo(o.getNumeroMatricula());
 	}
 	
 	
