@@ -11,6 +11,8 @@ public class Carro {
 	public String toString() {
 		return "Carro [nome=" + nome + "]";
 	}
-	
+	 public String getNome() {
+		return nome;
+	}
 	
 }
