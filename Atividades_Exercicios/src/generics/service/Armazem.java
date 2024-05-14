@@ -23,7 +23,7 @@ public class Armazem<T> {
 		if(itens.contains(item)) {
 			System.out.println("Objeto encontrado");
 		}else {
-			System.out.println("Objeto" + item + " não está na lista");
+			System.out.println("Objeto " + item + " não está na lista");
 		}
 	}
 	public void mostrarItens() {
