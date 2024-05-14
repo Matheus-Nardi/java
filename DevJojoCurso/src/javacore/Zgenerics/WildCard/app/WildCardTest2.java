@@ -20,7 +20,6 @@ public class WildCardTest2 {
 			animal.consulta();
 		}
 		
-		animais.add(new Cachorro());
 		//Não posso adicionar elementos, apenas a leitura
 		//Não há uma certeza se é um Cachorro ou gato
 	}
