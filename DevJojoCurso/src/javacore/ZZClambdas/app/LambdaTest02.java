@@ -9,6 +9,8 @@ public class LambdaTest02 {
 		List<String> names = List.of("Ana" , "Matheus", "Maria");
 		System.out.println(map(names , n -> n.length()));
 		System.out.println(map(names , n -> n.toUpperCase()));
+		
+		
 	}
 
 	private static <T, R> List<R> map(List<T> list, Function<T, R> function) {
