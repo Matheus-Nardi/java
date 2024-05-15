@@ -23,9 +23,6 @@ public class Main {
 		
 		//Predicate e lambda
 		showMovie(filterMovie(movies, m -> m.getDuration() >= 100));
-		
-		
-		
 	}
 	
 	public static List<Movie> filterByDuration(List<Movie> movies, Integer duration){
