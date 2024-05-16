@@ -20,4 +20,6 @@ Um simples repositório que visa documentar o processo de aprendizado em java pa
 -[Generics](DevJojoCurso/src/javacore/Zgenerics/readmeGenerics.md)
 
 -[Classes/Interfaces anônimas](DevJojoCurso/src/javacore/ZZAclassesinternas/app/readmeAnonymous.md)
+
+-[Lambdas](DevJojoCurso/src/javacore/ZZClambdas/app/readme.md)
     
