@@ -10,6 +10,7 @@ public class Atvd04 {
 	public static void main(String[] args) {
 		List<String> nomes = List.of("Ananias","Amanda","Ricado","Matheus","ana");
 		mutante(nomes , n -> n.charAt(0) == 'A' || n.charAt(0) == 'a', n -> n.toUpperCase() , n -> System.out.println(n));
+		
 	}
 	
 	private static List<String> mutante(List<String> nomes, Predicate<String> predicate, Function<String, String> function , Consumer<String> consumer){
