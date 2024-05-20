@@ -6,6 +6,15 @@ public class Book implements Comparable<Book> {
 	private Integer id;
 	private String nome;
 	private Double preco;
+	private Category category;
+
+	public Book(Integer id, String nome, Double preco, Category category) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.preco = preco;
+		this.category = category;
+	}
 
 	public Book(Integer id, String nome, Double preco) {
 		super();
@@ -34,9 +43,17 @@ public class Book implements Comparable<Book> {
 		this.preco = preco;
 	}
 
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", nome=" + nome + ", preco=" + preco + "]";
+		return "Book [id=" + id + ", nome=" + nome + ", preco=" + preco + ", category=" + category + "]";
 	}
 
 	@Override
@@ -60,7 +77,5 @@ public class Book implements Comparable<Book> {
 		Book other = (Book) obj;
 		return Objects.equals(nome, other.nome);
 	}
-	
-	
 
 }
