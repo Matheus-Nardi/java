@@ -22,7 +22,7 @@ public class StreamTest14 {
 	
 		System.out.println(collect);
 		
-		//Categoria e maior preco
+		//Categoria e maior preco retornando optional
 		Map<Category, Optional<Book>> collect2 = books.stream()
 			.collect
 			(Collectors.groupingBy(Book::getCategory ,
@@ -30,5 +30,12 @@ public class StreamTest14 {
 			);
 		
 		System.out.println(collect2);
+		
+		//Categoria e maior preco retornando sem optional
+		Map<Category, Book> collect3 = books.stream()
+			.collect(Collectors.groupingBy(Book::getCategory ,
+					Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparing(Book::getNome)), Optional::get)));
+		
+		System.out.println(collect3);
 	}
 }
