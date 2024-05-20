@@ -8,6 +8,17 @@ public class Employer {
 	private String email;
 	private Double salary;
 	private Integer idade;
+	private Departament departament;
+
+	public Employer(Integer id, String name, String email, Double salary, Integer idade, Departament departament) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.salary = salary;
+		this.idade = idade;
+		this.departament = departament;
+	}
 
 	public Employer(Integer id, String name, String email, Double salary, Integer idade) {
 		super();
@@ -58,6 +69,14 @@ public class Employer {
 		this.idade = idade;
 	}
 
+	public Departament getDepartament() {
+		return departament;
+	}
+
+	public void setDepartament(Departament departament) {
+		this.departament = departament;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(email, id, idade, name, salary);
@@ -79,9 +98,9 @@ public class Employer {
 	@Override
 	public String toString() {
 		return "Employer [id=" + id + ", name=" + name + ", email=" + email + ", salary=" + salary + ", idade=" + idade
-				+ "]";
+				+ ", departament=" + departament + "]";
 	}
-	
+
 	public void setNewSalaray(Double aumento) {
 		this.salary += this.salary * aumento;
 	}
