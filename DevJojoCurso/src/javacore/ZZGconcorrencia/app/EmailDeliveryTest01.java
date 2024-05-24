@@ -1,9 +1,10 @@
-package javacore.ZZFThreads.app;
+package javacore.ZZGconcorrencia.app;
 
 import javax.swing.JOptionPane;
 
-import javacore.ZZFThreads.model.Members;
-import javacore.ZZFThreads.service.EmailDeliveryService;
+import javacore.ZZGconcorrencia.model.Members;
+import javacore.ZZGconcorrencia.service.EmailDeliveryService;
+
 
 public class EmailDeliveryTest01 {
 	public static void main(String[] args) {
