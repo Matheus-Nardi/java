@@ -8,7 +8,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Members {
 	private final Queue<String> emails = new ArrayBlockingQueue<String>(10);
 	private final ReentrantLock lock = new ReentrantLock();
-	private final Condition condition = lock.newCondition();
+	private final Condition condition = lock.newCondition(); //Fornece os avisos : wait,notify
 
 	private boolean open = true;
 
