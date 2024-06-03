@@ -24,4 +24,6 @@ Um simples repositório que visa documentar o processo de aprendizado em java pa
 -[Lambdas](DevJojoCurso/src/javacore/ZZClambdas/app/readme.md)
 
 -[Stream](DevJojoCurso/src/javacore/ZZstream/readmeStream.md)
+
+-[Threads e Concorrencia](DevJojoCurso/src/javacore/ZZGconcorrencia/readme.md)
     
