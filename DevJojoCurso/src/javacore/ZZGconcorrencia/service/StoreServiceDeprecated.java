@@ -7,7 +7,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
-public class StoreService {
+public class StoreServiceDeprecated {
 	private static final ExecutorService exeService = Executors.newCachedThreadPool();
 
 	public double getPriceSync(String storeName) {
@@ -15,21 +15,6 @@ public class StoreService {
 		return priceGenerator();
 	}
 
-	public Future<Double> getPricesAsyncFuture(String storeName) {
-		System.out.printf("Obtendo preço de forma assincrona da loja: %s %n", storeName);
-
-		return exeService.submit(this::priceGenerator);
-
-	}
-	
-	//Completable Future não precisa de um ExecutorService
-	public CompletableFuture<Double> getPricesAsyncCompletableFuture(String storeName) {
-		System.out.printf("Obtendo preço de forma assincrona da loja: %s %n", storeName);
-
-		return CompletableFuture.supplyAsync(this::priceGenerator);
-
-	}
-	
 	public static void shutdown() {
 		exeService.shutdown();
 	}

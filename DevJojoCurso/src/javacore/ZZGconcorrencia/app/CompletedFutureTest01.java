@@ -50,6 +50,7 @@ public class CompletedFutureTest01 {
 		CompletableFuture<Double> pricesAsyncFuture3 = storeService.getPricesAsyncCompletableFuture("Store 3");
 		CompletableFuture<Double> pricesAsyncFuture4 = storeService.getPricesAsyncCompletableFuture("Store 4");
 
+		//Join não precisa tratar execeção
 		System.out.println(pricesAsyncFuture.join());
 		System.out.println(pricesAsyncFuture2.join());
 		System.out.println(pricesAsyncFuture3.join());
