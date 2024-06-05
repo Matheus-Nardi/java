@@ -25,6 +25,7 @@ public class AircraftSingletonLazy {
 		return name;
 	}
 
+	// criação de maneira safe
 	public static AircraftSingletonLazy getIstance() {
 		if (ISTANCE == null) {
 			synchronized (AircraftSingletonLazy.class) {

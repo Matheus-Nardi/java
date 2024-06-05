@@ -7,6 +7,10 @@ public final class Aircraft {
 	private final Set<String> avaliableSeats = new HashSet<String>();
 	private final String name;
 	
+	public String getName() {
+		return name;
+	}
+	
 	public Aircraft(String name){
 		this.name = name;
 	}
