@@ -2,6 +2,7 @@ package javacore.ZZHpadroesdeprojeto.dominio;
 
 //DTO serve quando preciso acessar varios objetos diferentes
 //Crio uma classe com todos os objetos necessarios
+//Em vez de mandar 4 objetos, mando apenas 1
 public class ReportDto {
 	private String aircraftName;
 	private Country country;
