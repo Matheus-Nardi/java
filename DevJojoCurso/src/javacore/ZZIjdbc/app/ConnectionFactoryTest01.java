@@ -1,13 +1,22 @@
 package javacore.ZZIjdbc.app;
 
 import javacore.ZZIjdbc.model.Producer;
-import javacore.ZZIjdbc.repository.ProducerRepository;
+import javacore.ZZIjdbc.service.ProducerService;
 
 public class ConnectionFactoryTest01 {
 	public static void main(String[] args) {
-		Producer producer = Producer.ProducerBuilder.builder()
-		.name("Animate").build();
+
+		Producer producer = Producer.builder().name("Studio Deen").build();
+		Producer producerUpdate = Producer.builder().id(8).name("NHW").build();
+		//ProducerService.save(producer);
+		//ProducerService.deleteBetween(3,6);
+		//ProducerService.delete(7);
+		//ProducerService.update(producerUpdate);
 		
-		ProducerRepository.save(producer);
+		ProducerService.findAll().forEach(System.out::println);
+		
+		ProducerService.findByName("Ani").forEach(System.out::println);
+		
+
 	}
 }
