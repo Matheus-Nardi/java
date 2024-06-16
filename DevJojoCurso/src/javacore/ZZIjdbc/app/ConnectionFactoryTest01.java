@@ -1,5 +1,7 @@
 package javacore.ZZIjdbc.app;
 
+import java.util.List;
+
 import javacore.ZZIjdbc.model.Producer;
 import javacore.ZZIjdbc.service.ProducerService;
 import lombok.extern.log4j.Log4j2;
@@ -21,7 +23,11 @@ public class ConnectionFactoryTest01 {
 //		ProducerService.showProducerMetaData();
 		
 //		ProducerService.showDriverMetaData();
-		ProducerService.showTypeScrollWorking();
-
+//		ProducerService.showTypeScrollWorking();
+		
+//		ProducerService.findByNameAndUpdateToUpperCase("animate").forEach(System.out::println);
+		ProducerService.findByNameAndInsertWhenNotFound("Bones").forEach(System.out::println);
+		
+//		ProducerService.findByNameAndDelete("A-1 pictures");
 	}
 }
