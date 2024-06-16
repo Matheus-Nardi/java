@@ -2,6 +2,7 @@ package javacore.ZZIjdbc.app;
 
 import javacore.ZZIjdbc.model.Producer;
 import javacore.ZZIjdbc.service.ProducerService;
+import lombok.extern.log4j.Log4j2;
 
 public class ConnectionFactoryTest01 {
 	public static void main(String[] args) {
@@ -13,10 +14,14 @@ public class ConnectionFactoryTest01 {
 		//ProducerService.delete(7);
 		//ProducerService.update(producerUpdate);
 		
-		ProducerService.findAll().forEach(System.out::println);
+//		ProducerService.findAll().forEach(System.out::println);
 		
-		ProducerService.findByName("Ani").forEach(System.out::println);
+//		ProducerService.findByName("Ani").forEach(System.out::println);
 		
+//		ProducerService.showProducerMetaData();
+		
+//		ProducerService.showDriverMetaData();
+		ProducerService.showTypeScrollWorking();
 
 	}
 }
