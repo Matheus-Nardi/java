@@ -3,14 +3,14 @@ package com.mafn.movie_libary.domain.models;
 public enum Genre {
 
     ACTION(20, "Action"),
-    ADVENTURE(2, "Adventure"),
-    COMEDY(3, "Comedy"),
-    DRAMA(4, "Drama"),
-    FANTASY(5, "Fantasy"),
-    HORROR(6, "Horror"),
-    ROMANCE(7, "Romance"),
-    SCIENCE_FICTION(8, "Science Fiction"),
-    THRILLER(9, "Thriller");
+    ADVENTURE(21, "Adventure"),
+    COMEDY(22, "Comedy"),
+    DRAMA(23, "Drama"),
+    FANTASY(24, "Fantasy"),
+    HORROR(25, "Horror"),
+    ROMANCE(26, "Romance"),
+    SCIENCE_FICTION(27, "Science Fiction"),
+    THRILLER(28, "Thriller");
 
     private final int id;
     private final String label;
@@ -28,7 +28,11 @@ public enum Genre {
         return label;
     }
     
-    
+    public static void showValues() {
+    	for (Genre genre : values()) {
+			System.out.println(genre.getId() + " - " + genre.getLabel());
+		}
+    }
     public static Genre valueOf(Integer id) {
     	for (Genre genre : values()) {
             if (genre.getId() == id) {

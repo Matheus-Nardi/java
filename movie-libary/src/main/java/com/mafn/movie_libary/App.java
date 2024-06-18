@@ -2,18 +2,15 @@ package com.mafn.movie_libary;
 
 import java.util.Scanner;
 
+import com.mafn.movie_libary.domain.models.Movie;
 import com.mafn.movie_libary.service.MovieService;
-
-import lombok.extern.log4j.Log4j2;
-
-@Log4j2
 public class App 
 {
 	private static final Scanner SCAN = new Scanner(System.in);
     public static void main( String[] args )
     {
+    	menu();
     	
-    
     }
     
     
@@ -27,7 +24,34 @@ public class App
     		System.out.println("[3] UPDATE A MOVIE");
     		System.out.println("[4] READ ALL MOVIES");
     		System.out.println("[5] EXIT");
-    		
+    		op = Integer.parseInt(SCAN.nextLine());
+    		switch(op) {
+    		case 1 :
+				MovieService.save(Movie.createMovie());
+    			break;
+    		case 2: 
+    			MovieService.read();
+    			System.out.println("Type the id of the movie:");
+    			MovieService.delete(Integer.valueOf(SCAN.nextLine()));
+    			break;
+    		case 3:
+    			System.out.println("Update your movie by id:");
+    			MovieService.read();
+    			Integer id = Integer.parseInt(SCAN.nextLine());;
+    			Movie movieUpdate = Movie.createMovie();
+    			movieUpdate.setId(id);
+    			MovieService.update(movieUpdate);
+    		case 4:
+    			MovieService.read().forEach(System.out::println);
+    			break;
+    		case 5:
+    			menuOpen = false;
+    			System.out.println("See you later!");
+    			break;
+    			default : 
+    				System.out.println("Sorry , this option was not found!");
+    				break;
+    		}
     	}
     }
 

@@ -17,7 +17,7 @@ public class MovieRepository {
 	
 		public static void save(Movie movie) {
 			String sql = "INSERT INTO `movie_libary`.`movies` (`title`, `director`, `realese_year`, `genre`) VALUES ('%s', '%s', '%d', '%d')"
-					.formatted(movie.getTitle(), movie.getDirector(), movie.getRelease_year(), movie.getGenre().getId());
+					.formatted(movie.getTitle(), movie.getDirector(), movie.getRealese_year(), movie.getGenre().getId());
 			
 			try(Connection conn = ConnectionFactory.getConnection();
 				Statement stmt = conn.createStatement();){
@@ -43,7 +43,7 @@ public class MovieRepository {
 		
 		public static void update(Movie movie) {
 			String sql = "UPDATE `movie_libary`.`movies` SET `title` = '%s', `director` = '%s', `realese_year` = '%d', `genre` = '%d' WHERE (`id` = '%d');"
-					.formatted(movie.getTitle(), movie.getDirector(), movie.getRelease_year(), movie.getGenre().getId(), movie.getId());
+					.formatted(movie.getTitle(), movie.getDirector(), movie.getRealese_year(), movie.getGenre().getId(), movie.getId());
 			
 			try(Connection conn = ConnectionFactory.getConnection();
 				Statement stmt = conn.createStatement();){
@@ -66,7 +66,7 @@ public class MovieRepository {
 					Movie movie = Movie.builder()
 					.id(rs.getInt("id"))
 					.title(rs.getString("title"))
-					.release_year(rs.getInt("release_year"))
+					.realese_year(rs.getInt("realese_year"))
 					.genre(Genre.valueOf(rs.getInt("genre")))
 					.build();
 					

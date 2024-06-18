@@ -9,7 +9,7 @@ import com.mafn.movie_libary.repository.MovieRepository;
 public class MovieService {
 	Scanner scan = new Scanner(System.in);
 	public static void save(Movie movie) {
-		MovieRepository.save(Movie.createMovie());
+		MovieRepository.save(movie);
 	}
 
 	public static void delete(Integer id) {
