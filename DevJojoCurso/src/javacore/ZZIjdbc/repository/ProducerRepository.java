@@ -2,6 +2,7 @@ package javacore.ZZIjdbc.repository;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -60,6 +61,28 @@ public class ProducerRepository {
 		}
 
 	}
+	
+	public static void updatePreparedStatment(Producer producer) {
+
+	
+		try (Connection conn = ConnectionFactory.getConnection();
+				PreparedStatement ps = createdPreparedStatementUpdate(conn, producer);) {
+			int rows = ps.executeUpdate();
+			System.out.printf("Updated producer in the database, rows affected %d", rows);
+		} catch (SQLException e) {
+			System.out.printf("Error while trying to delete producer %s", e);
+		}
+
+	}
+	
+	private static PreparedStatement createdPreparedStatementUpdate(Connection connection, Producer producer)
+			throws SQLException {
+		String sql = "UPDATE `anime_store`.`producer` SET `name` = ? WHERE (`id` = ?);";
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ps.setString(1, producer.getName());
+		ps.setInt(2, producer.getId());
+		return ps;
+	}
 
 	public static List<Producer> findAll() {
 		List<Producer> producers = new ArrayList<Producer>();
@@ -85,7 +108,7 @@ public class ProducerRepository {
 	public static List<Producer> findByName(String name) {
 		List<Producer> producers = new ArrayList<Producer>();
 		System.out.println("Finding all Producers by name");
-		String sql = "SELECT * FROM `anime_store`.`producer` WHERE name LIKE '%%%s%%'".formatted(name);
+		String sql = "SELECT * FROM `anime_store`.`producer` WHERE name LIKE '%%s%%'".formatted(name);
 
 		try (Connection conn = ConnectionFactory.getConnection();
 				Statement stmt = conn.createStatement();
@@ -101,6 +124,34 @@ public class ProducerRepository {
 			System.out.printf("Error while to find all producers %s", e);
 		}
 		return producers;
+	}
+
+	public static List<Producer> findByNamePreparedStatement(String name) {
+		List<Producer> producers = new ArrayList<Producer>();
+		System.out.println("Finding all Producers by name");
+
+		try (Connection conn = ConnectionFactory.getConnection();
+				PreparedStatement ps = createdPreparedStatementFindByName(conn, name);
+				ResultSet rs = ps.executeQuery();) {
+
+			while (rs.next()) {
+				Producer producer = Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build();
+
+				producers.add(producer);
+			}
+
+		} catch (SQLException e) {
+			System.out.printf("Error while to find all producers %s", e);
+		}
+		return producers;
+	}
+
+	private static PreparedStatement createdPreparedStatementFindByName(Connection connection, String name)
+			throws SQLException {
+		String sql = "SELECT * FROM `anime_store`.`producer` WHERE name LIKE ?";
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ps.setString(1, String.format("%%s%%", name));
+		return ps;
 	}
 
 	public static void showProducerMetaData() {
@@ -253,9 +304,9 @@ public class ProducerRepository {
 				Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 				ResultSet rs = stmt.executeQuery(sql)) {
 			if (rs.next()) {
-				System.out.printf("Producer %s already exists" , name); 
+				System.out.printf("Producer %s already exists", name);
 				return producers;
-				
+
 			}
 
 			insertNewProducer(name, rs);
@@ -266,16 +317,16 @@ public class ProducerRepository {
 		}
 		return producers;
 	}
-	
+
 	public static void findByNameAndDelete(String name) {
-	
+
 		System.out.println("Finding and delete producers by name");
 		String sql = "SELECT * FROM `anime_store`.`producer` WHERE name LIKE '%%%s%%'".formatted(name);
 
 		try (Connection conn = ConnectionFactory.getConnection();
 				Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 				ResultSet rs = stmt.executeQuery(sql)) {
-			while(rs.next()) {
+			while (rs.next()) {
 				System.out.println("Deleting " + rs.getString("name"));
 				rs.deleteRow();
 			}
@@ -284,9 +335,6 @@ public class ProducerRepository {
 			System.out.printf("Error while to find all producers %s", e);
 		}
 	}
-	
-	
-	
 
 	private static void insertNewProducer(String name, ResultSet rs) throws SQLException {
 		rs.moveToInsertRow(); // Movendo para uma linha temporariars

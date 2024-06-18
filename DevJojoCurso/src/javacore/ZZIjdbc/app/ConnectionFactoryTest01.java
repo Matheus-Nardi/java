@@ -10,7 +10,7 @@ public class ConnectionFactoryTest01 {
 	public static void main(String[] args) {
 
 		Producer producer = Producer.builder().name("Studio Deen").build();
-		Producer producerUpdate = Producer.builder().id(8).name("NHW").build();
+		Producer producerUpdate = Producer.builder().id(1).name("Studio Deen").build();
 		//ProducerService.save(producer);
 		//ProducerService.deleteBetween(3,6);
 		//ProducerService.delete(7);
@@ -26,8 +26,11 @@ public class ConnectionFactoryTest01 {
 //		ProducerService.showTypeScrollWorking();
 		
 //		ProducerService.findByNameAndUpdateToUpperCase("animate").forEach(System.out::println);
-		ProducerService.findByNameAndInsertWhenNotFound("Bones").forEach(System.out::println);
-		
+//		System.out.println(ProducerService.findByNamePreparedStatement("Bone"));
 //		ProducerService.findByNameAndDelete("A-1 pictures");
+		
+		ProducerService.updatePreparedStatment(producerUpdate);
+		
+		
 	}
 }

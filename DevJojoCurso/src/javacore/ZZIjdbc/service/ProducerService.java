@@ -27,6 +27,10 @@ public class ProducerService {
 		requireValidId(producer.getId());
 		ProducerRepository.update(producer);
 	}
+	public static void updatePreparedStatment(Producer producer) {
+		requireValidId(producer.getId());
+		ProducerRepository.update(producer);
+	}
 	
 	public static List<Producer> findAll() {
 		return ProducerRepository.findAll();
@@ -58,9 +62,16 @@ public class ProducerService {
 	public static void findByNameAndDelete(String name) {
 		ProducerRepository.findByNameAndDelete(name);
 	}
+	public static List<Producer> findByNamePreparedStatement(String name) {
+		return ProducerRepository.findByNamePreparedStatement(name);
+	}
+	
+	
 
 	private static void requireValidId(Integer id) {
 		if (id == null || id <= 0)
 			throw new IllegalArgumentException("Invalid value for id");
 	}
+	
+	
 }
