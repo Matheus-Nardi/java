@@ -2,7 +2,7 @@ package com.mafn.movie_libary.domain.models;
 
 public enum Genre {
 
-    ACTION(1, "Action"),
+    ACTION(20, "Action"),
     ADVENTURE(2, "Adventure"),
     COMEDY(3, "Comedy"),
     DRAMA(4, "Drama"),
@@ -26,5 +26,15 @@ public enum Genre {
 
     public String getLabel() {
         return label;
+    }
+    
+    
+    public static Genre valueOf(Integer id) {
+    	for (Genre genre : values()) {
+            if (genre.getId() == id) {
+                return genre;
+            }
+        }
+        throw new IllegalArgumentException("No matching Genre for id " + id);
     }
 }

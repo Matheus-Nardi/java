@@ -1,33 +1,35 @@
 package com.mafn.movie_libary;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.Scanner;
 
-import com.mafn.movie_libary.conn.ConnectionFactory;
-import com.mafn.movie_libary.domain.models.Genre;
+import com.mafn.movie_libary.service.MovieService;
 
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 public class App 
 {
+	private static final Scanner SCAN = new Scanner(System.in);
     public static void main( String[] args )
     {
-    		for (Genre g : Genre.values()) {
-				insertGenre(g);
-			}
+    	
+    
+    }
+    
+    
+    public static void menu() {
+    	boolean menuOpen = true;
+    	Integer op = 0;
+    	while(menuOpen) {
+    		System.out.println("Type the number of your operation:");
+    		System.out.println("[1] SAVE A MOVIE");
+    		System.out.println("[2] DELETE A MOVIE");
+    		System.out.println("[3] UPDATE A MOVIE");
+    		System.out.println("[4] READ ALL MOVIES");
+    		System.out.println("[5] EXIT");
+    		
+    	}
     }
 
-	private static void insertGenre(Genre genre) {
-		String sql = "INSERT INTO `movie_libary`.`genres` (`name`) VALUES ('%s')".formatted(genre.getLabel());
-    	
-    	try(Connection conn = ConnectionFactory.getConnection();
-    		Statement stmt = conn.createStatement();){
-    		int rows = stmt.executeUpdate(sql);
-    		log.info("Inserido '{}' no banco de dados , linhas afetadas '{}'" , genre.getLabel() ,rows);
-    	}catch(SQLException e) {
-    		log.info("Erro ao inserir dados na tabela 'genre'" );
-    	}
-	}
+	
 }
