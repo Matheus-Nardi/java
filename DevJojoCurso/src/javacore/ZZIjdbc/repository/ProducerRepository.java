@@ -8,8 +8,9 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
+import com.mysql.cj.jdbc.CallableStatement;
 
 import javacore.ZZIjdbc.conn.ConnectionFactory;
 import javacore.ZZIjdbc.model.Producer;
@@ -153,6 +154,47 @@ public class ProducerRepository {
 		ps.setString(1, String.format("%%s%%", name));
 		return ps;
 	}
+	public static List<Producer> findByNameCallableStatement(String name) {
+	    List<Producer> producers = new ArrayList<>();
+	    System.out.println("Finding all Producers by name");
+	    
+	    try (Connection conn = ConnectionFactory.getConnection();
+	    		java.sql.CallableStatement cs = createdCallableStatementFindByName(conn, name);
+	         ResultSet rs = cs.executeQuery()) {
+	        
+	        while (rs.next()) {
+	            Producer producer = Producer.builder()
+	                                        .id(rs.getInt("id"))
+	                                        .name(rs.getString("name"))
+	                                        .build();
+	            producers.add(producer);
+	        }
+	        
+	    } catch (SQLException e) {
+	        System.out.printf("Error while finding all producers %s", e);
+	    }
+	    return producers;
+	}
+
+	
+	/**
+	 * 
+	 * @param connection
+	 * @param name
+	 * @return o metodo retorna um CallableStatement , que serve basicamente para execução de store procedures e functions do bd
+	 * @throws SQLException
+	 */
+	private static java.sql.CallableStatement createdCallableStatementFindByName(Connection connection, String name)
+	        throws SQLException {
+	    String sql = "call anime_store.sp_get_producer_by_name(?);";
+	    java.sql.CallableStatement cs = connection.prepareCall(sql);
+	    cs.setString(1, "%" + name + "%");
+	    return cs;
+	}
+
+	
+	
+
 
 	public static void showProducerMetaData() {
 

@@ -29,7 +29,9 @@ public class ConnectionFactoryTest01 {
 //		System.out.println(ProducerService.findByNamePreparedStatement("Bone"));
 //		ProducerService.findByNameAndDelete("A-1 pictures");
 		
-		ProducerService.updatePreparedStatment(producerUpdate);
+//		ProducerService.updatePreparedStatment(producerUpdate);
+		
+		System.out.println(ProducerService.findByNameCallableStatement("bosta"));
 		
 		
 	}
