@@ -11,6 +11,11 @@ public class ProducerService {
 		ProducerRepository.save(producer);
 	}
 
+	public static void saveTransaction(List<Producer> producers) {
+		ProducerRepository.saveTransaction(producers);
+	}
+	
+	
 	public static void deleteBetween(Integer firstId, Integer lastId) {
 		if (firstId <= 0 || lastId <= 0)
 			throw new IllegalArgumentException("Invalid value for id");
@@ -69,6 +74,7 @@ public class ProducerService {
 	public static List<Producer> findByNameCallableStatement(String name) {
 		return ProducerRepository.findByNameCallableStatement(name);
 	}
+	
 	
 	
 

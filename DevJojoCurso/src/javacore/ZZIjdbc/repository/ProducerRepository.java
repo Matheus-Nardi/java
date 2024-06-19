@@ -27,6 +27,42 @@ public class ProducerRepository {
 		}
 	}
 
+	public static void saveTransaction(List<Producer> producers) {
+
+		try (Connection conn = ConnectionFactory.getConnection();) {
+			conn.setAutoCommit(false); //Evitando que o bd ja incremente os valores de maneira indepedente 
+			conn.commit(); //Confirmando a ação
+			createdPreparedStatementSaveTransaction(conn, producers);
+			System.out.printf("Updated producers in the database, rows was affected");
+		} catch (SQLException e) {
+			System.out.printf("Error while trying to save producers %s", e);
+		}
+
+	}
+
+	private static void createdPreparedStatementSaveTransaction(Connection connection, List<Producer> producers)
+			throws SQLException {
+		String sql = "INSERT INTO `anime_store`.`producer` (`name`) VALUES (?);";
+		boolean shouldRollback = false; 
+		for (Producer p : producers) {
+			try (PreparedStatement ps = connection.prepareStatement(sql);) {
+				System.out.printf("Saving producer '%s'%n" , p.getName());
+				ps.setString(1, p.getName());
+				if(p.getName().equals("White Fox")) throw new SQLException("Can't save white fox"); //Simulando um erro durante a transação
+				ps.execute();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				shouldRollback = true; //Verifcando se houve erro
+			}
+		}
+		
+		if(shouldRollback) {
+			System.out.println("Transaction is going be rollback");
+			connection.rollback();
+		}
+	}
+
 	public static void deleteBetween(Integer fisrtId, Integer lastId) {
 		String sql = "DELETE FROM `anime_store`.`producer` WHERE (`id` between %d AND %d);".formatted(fisrtId, lastId);
 
@@ -62,10 +98,9 @@ public class ProducerRepository {
 		}
 
 	}
-	
+
 	public static void updatePreparedStatment(Producer producer) {
 
-	
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = createdPreparedStatementUpdate(conn, producer);) {
 			int rows = ps.executeUpdate();
@@ -75,7 +110,7 @@ public class ProducerRepository {
 		}
 
 	}
-	
+
 	private static PreparedStatement createdPreparedStatementUpdate(Connection connection, Producer producer)
 			throws SQLException {
 		String sql = "UPDATE `anime_store`.`producer` SET `name` = ? WHERE (`id` = ?);";
@@ -154,47 +189,41 @@ public class ProducerRepository {
 		ps.setString(1, String.format("%%s%%", name));
 		return ps;
 	}
+
 	public static List<Producer> findByNameCallableStatement(String name) {
-	    List<Producer> producers = new ArrayList<>();
-	    System.out.println("Finding all Producers by name");
-	    
-	    try (Connection conn = ConnectionFactory.getConnection();
-	    		java.sql.CallableStatement cs = createdCallableStatementFindByName(conn, name);
-	         ResultSet rs = cs.executeQuery()) {
-	        
-	        while (rs.next()) {
-	            Producer producer = Producer.builder()
-	                                        .id(rs.getInt("id"))
-	                                        .name(rs.getString("name"))
-	                                        .build();
-	            producers.add(producer);
-	        }
-	        
-	    } catch (SQLException e) {
-	        System.out.printf("Error while finding all producers %s", e);
-	    }
-	    return producers;
+		List<Producer> producers = new ArrayList<>();
+		System.out.println("Finding all Producers by name");
+
+		try (Connection conn = ConnectionFactory.getConnection();
+				java.sql.CallableStatement cs = createdCallableStatementFindByName(conn, name);
+				ResultSet rs = cs.executeQuery()) {
+
+			while (rs.next()) {
+				Producer producer = Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build();
+				producers.add(producer);
+			}
+
+		} catch (SQLException e) {
+			System.out.printf("Error while finding all producers %s", e);
+		}
+		return producers;
 	}
 
-	
 	/**
 	 * 
 	 * @param connection
 	 * @param name
-	 * @return o metodo retorna um CallableStatement , que serve basicamente para execução de store procedures e functions do bd
+	 * @return o metodo retorna um CallableStatement , que serve basicamente para
+	 *         execução de store procedures e functions do bd
 	 * @throws SQLException
 	 */
 	private static java.sql.CallableStatement createdCallableStatementFindByName(Connection connection, String name)
-	        throws SQLException {
-	    String sql = "call anime_store.sp_get_producer_by_name(?);";
-	    java.sql.CallableStatement cs = connection.prepareCall(sql);
-	    cs.setString(1, "%" + name + "%");
-	    return cs;
+			throws SQLException {
+		String sql = "call anime_store.sp_get_producer_by_name(?);";
+		java.sql.CallableStatement cs = connection.prepareCall(sql);
+		cs.setString(1, "%" + name + "%");
+		return cs;
 	}
-
-	
-	
-
 
 	public static void showProducerMetaData() {
 
