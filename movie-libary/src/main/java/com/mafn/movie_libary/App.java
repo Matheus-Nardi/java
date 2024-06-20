@@ -23,28 +23,30 @@ public class App
     		System.out.println("[2] DELETE A MOVIE");
     		System.out.println("[3] UPDATE A MOVIE");
     		System.out.println("[4] READ ALL MOVIES");
-    		System.out.println("[5] EXIT");
+    		System.out.println("[5] READ A MOVIE by TITLE");
+    		System.out.println("[6] READ A MOVIE by ID");
+    		System.out.println("[7] EXIT");
     		op = Integer.parseInt(SCAN.nextLine());
     		switch(op) {
     		case 1 :
-				MovieService.save(Movie.createMovie());
+				MovieService.save();
     			break;
     		case 2: 
-    			MovieService.read();
-    			System.out.println("Type the id of the movie:");
-    			MovieService.delete(Integer.valueOf(SCAN.nextLine()));
+    			MovieService.readAll();
+    			MovieService.delete();
     			break;
     		case 3:
-    			System.out.println("Update your movie by id:");
-    			MovieService.read();
-    			Integer id = Integer.parseInt(SCAN.nextLine());;
-    			Movie movieUpdate = Movie.createMovie();
-    			movieUpdate.setId(id);
-    			MovieService.update(movieUpdate);
+    			MovieService.update();
     		case 4:
-    			MovieService.read().forEach(System.out::println);
+    			MovieService.readAll().forEach(System.out::println);
     			break;
     		case 5:
+    			MovieService.readByTitle().forEach(System.out::println);
+    			break;
+    		case 6:
+    			MovieService.readById();
+    			break;
+    		case 7:
     			menuOpen = false;
     			System.out.println("See you later!");
     			break;
