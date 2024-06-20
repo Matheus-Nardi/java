@@ -1,29 +1,50 @@
-# Trilha de Estudos em Java
 
-## Introdução
-Um simples repositório que visa documentar o processo de aprendizado em java para além do proposto pela faculdade.
-## Índice
--[Enumeradores](Biblioteca/enumeradores.md)
+# Trilha de Estudos JAVA ☕
 
--[Classes e metodos abstratos](OO/src/abstractClass/readme.md)
+Imagine um caderno onde você pode anotar tudo o que aprende e consultar sempre que precisar. Esse repositório é exatamente isso: um lugar onde guardo todo o conteúdo que estou estudando sobre Java e que posso usar para revisar e tirar dúvidas.
 
--[Interfaces](OO/src/interfaces/readme.md)
+## Instalação
 
--[Polimorfismo](OO/src/polimorfismo/readme.md)
+Caso queira visualizar melhor os projetos em sua máquina, siga os passos abaixo:
 
--Coleções
+### Pré-requisitos
+
+- Java JDK (versão 21 ou superior)
+- Maven (versão 3.9.7 ou superior)
+
+### Passos
+
+1. Clone o repositório:
+
+   ```sh
+   git clone https://github.com/Matheus-Nardi/java
+   ```
+
+2. Entre no seu repositório ou em algum projeto específico:
+
+   ```sh
+   cd /caminho/para/seu/diretorio
+   ```
+
+3. Baixe as dependências para projetos específicos, como DevJojoCurso ou movie-library:
+
+   ```sh
+   mvn clean install
+   ```
+
+### Índice
+
+- [Enumeradores](Biblioteca/enumeradores.md)
+- [Classes e métodos abstratos](OO/src/abstractClass/readme.md)
+- [Interfaces](OO/src/interfaces/readme.md)
+- [Polimorfismo](OO/src/polimorfismo/readme.md)
+- Coleções
   - [Listas](DevJojoCurso/src/javacore/Ycolecoes/readme.md)
-  - [Set](DevJojoCurso/src/javacore/Ycolecoes/reamdeSet.md)
+  - [Set](DevJojoCurso/src/javacore/Ycolecoes/readmeSet.md)
   - [Mapa](DevJojoCurso/src/javacore/Ycolecoes/readmeMap.md)
   - [Fila](DevJojoCurso/src/javacore/Ycolecoes/readmeQueue.md)
-
--[Generics](DevJojoCurso/src/javacore/Zgenerics/readmeGenerics.md)
-
--[Classes/Interfaces anônimas](DevJojoCurso/src/javacore/ZZAclassesinternas/app/readmeAnonymous.md)
-
--[Lambdas](DevJojoCurso/src/javacore/ZZClambdas/app/readme.md)
-
--[Stream](DevJojoCurso/src/javacore/ZZstream/readmeStream.md)
-
--[Threads e Concorrencia](DevJojoCurso/src/javacore/ZZGconcorrencia/readme.md)
-    
+- [Generics](DevJojoCurso/src/javacore/Zgenerics/readmeGenerics.md)
+- [Classes/Interfaces anônimas](DevJojoCurso/src/javacore/ZZAclassesinternas/app/readmeAnonymous.md)
+- [Lambdas](DevJojoCurso/src/javacore/ZZClambdas/app/readme.md)
+- [Stream](DevJojoCurso/src/javacore/ZZstream/readmeStream.md)
+- [Threads e Concorrência](DevJojoCurso/src/javacore/ZZGconcorrencia/readme.md)
