@@ -1,7 +1,10 @@
 package com.mafn.movie_libary.service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import com.mafn.movie_libary.domain.models.Genre;
 import com.mafn.movie_libary.domain.models.Movie;
@@ -71,6 +74,18 @@ public class MovieService {
 		System.out.println("Type de id of the movie that you want to search : ");
 		int idMovieToSearch = Integer.parseInt(SCAN.nextLine());
 		return MovieRepository.readById(idMovieToSearch);
+	}
+	
+	
+	public static boolean isFromCurrentYear(Movie movie) {
+		Objects.requireNonNull(movie, "Movie can't be null");
+		
+		return movie.getRealese_year().equals(LocalDate.now().getYear());
+	}
+	
+	public static List<Movie> filterRemovingMoviesNotFromCurrentYear(List<Movie> movies){
+		return movies.stream()
+				.filter(MovieService::isFromCurrentYear).collect(Collectors.toList());
 	}
 
 }
