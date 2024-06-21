@@ -60,6 +60,7 @@ public class MovieRepository {
 
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement ps = createPreparedStatementUpdate(conn, movie)) {
+			ps.execute();
 			log.info("Updated movie '{}' in the database", movie.getTitle());
 		} catch (SQLException e) {
 			log.error("Error while trying to update a movie : {}", e);
@@ -67,13 +68,12 @@ public class MovieRepository {
 	}
 
 	private static PreparedStatement createPreparedStatementUpdate(Connection conn, Movie movie) throws SQLException {
-		String sql = "UPDATE `movie_libary`.`movies` SET `title` = ?, `director` = ?, `realese_year` = ?, `genre` = ? WHERE (`id` = ?);";
+		String sql = "UPDATE `movie_libary`.`movies` SET `title` = ?, `director` = ?, `realese_year` = ? WHERE (`id` = ?);";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, movie.getTitle());
 		ps.setString(2, movie.getDirector());
 		ps.setInt(3, movie.getRealese_year());
-		ps.setInt(4, movie.getGenre().getId());
-		ps.setLong(5, movie.getId());
+		ps.setLong(4, movie.getId());
 		return ps;
 
 	}
@@ -86,7 +86,7 @@ public class MovieRepository {
 				ResultSet rs = ps.executeQuery();) {
 
 			while (rs.next()) {
-				Movie movie = Movie.builder().id(rs.getInt("id")).title(rs.getString("title"))
+				Movie movie = Movie.builder().id(rs.getInt("id")).title(rs.getString("title")).director(rs.getString("director"))
 						.realese_year(rs.getInt("realese_year")).genre(Genre.valueOf(rs.getInt("genre"))).build();
 
 				movies.add(movie);
@@ -114,6 +114,7 @@ public class MovieRepository {
 
 			while (rs.next()) {
 				Movie movie = Movie.builder().id(rs.getInt("id")).title(rs.getString("title"))
+						.director(rs.getString("director"))
 						.realese_year(rs.getInt("realese_year")).genre(Genre.valueOf(rs.getInt("genre"))).build();
 
 				movies.add(movie);
@@ -128,7 +129,7 @@ public class MovieRepository {
 	private static PreparedStatement createPreparedStatementRead(Connection conn, String title) throws SQLException {
 		String sql = "SELECT * FROM movie_libary.movies WHERE movies.title LIKE ?; ";
 		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setString(1, title);
+		ps.setString(1, "%" + title + "%");
 		return ps;
 
 	}
@@ -140,6 +141,7 @@ public class MovieRepository {
 				ResultSet rs = ps.executeQuery();) {
 			while (rs.next()) {
 				movieFindById = Movie.builder().id(rs.getInt("id")).title(rs.getString("title"))
+						.director(rs.getString("director"))
 						.realese_year(rs.getInt("realese_year")).genre(Genre.valueOf(rs.getInt("genre"))).build();
 
 				

@@ -40,6 +40,7 @@ public class MovieService {
 		System.out.println("Type de id of the movie that you want to update : ");
 		int idMovieToUpdate = Integer.parseInt(SCAN.nextLine());
 		Movie movieFromDB = MovieRepository.readById(idMovieToUpdate);
+		System.out.println("MOVIE: " + movieFromDB);
 		System.out.println("NEW OR EMPTY TTILE FOR THE SAME:");
 		String title = SCAN.nextLine();
 		title = title.isEmpty() ? movieFromDB.getTitle() : title;
@@ -50,10 +51,10 @@ public class MovieService {
 		String realese_year = SCAN.nextLine();
 		realese_year = realese_year.isEmpty() ? movieFromDB.getRealese_year().toString() : realese_year;
 
-		Movie movieUpdate = Movie.builder().title(title).director(director).realese_year(Integer.parseInt(realese_year))
+		Movie movieUpdate = Movie.builder().id(movieFromDB.getId()).title(title).director(director).realese_year(Integer.parseInt(realese_year)).genre(movieFromDB.getGenre())
 				.build();
 
-		MovieRepository.save(movieUpdate);
+		MovieRepository.update(movieUpdate);
 	}
 
 	public static List<Movie> readAll() {
@@ -61,7 +62,7 @@ public class MovieService {
 	}
 
 	public static List<Movie> readByTitle() {
-		System.out.println("Type the title of the movie that you waint to search:");
+		System.out.println("Type the title of the movie that you want to search:");
 		String title = SCAN.nextLine();
 		return MovieRepository.readByTitle(title);
 	}
