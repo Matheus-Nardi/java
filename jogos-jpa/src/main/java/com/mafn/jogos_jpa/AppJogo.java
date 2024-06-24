@@ -18,7 +18,7 @@ import lombok.extern.log4j.Log4j2;
  *
  */
 @Log4j2
-public class App {
+public class AppJogo {
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jogos_jpa");
 	private static EntityManager em = emf.createEntityManager();
 
@@ -26,8 +26,10 @@ public class App {
 		Jogo jogo = Jogo.builder().nome("Minecraft").dataLancamento(LocalDate.of(2006, 10, 10)).preco(120.99).build();
 		// persistirJogo(em, jogo);
 		// atualizarJogo(em, 301L);
-		//deletar(em, 101L);
-		obterJogos(em).forEach(System.out::println);
+		// deletar(em, 100L);
+		// obterJogos(em).forEach(System.out::println);
+		obterJogosByName(em, "a").forEach(System.out::println);
+		;
 
 	}
 
@@ -72,14 +74,22 @@ public class App {
 		return query.getResultList();
 	}
 
+	private static List<Jogo> obterJogosByName(EntityManager em, String nome) {
+		String jpql = "SELECT j FROM Jogo j WHERE j.nome LIKE :nome";
+		TypedQuery<Jogo> query = em.createQuery(jpql, Jogo.class);
+		query.setParameter("nome", "%" + nome + "%");
+		return query.getResultList();
+	}
+
 	private static void atualizarJogo(EntityManager em, Long id) {
 		boolean mergeSucesso = false;
 		try {
 			em.getTransaction().begin();
 			Jogo jogoFromDB = obterJogoById(em, id).get();
-			Jogo jogoToUpdate = Jogo.builder().nome("Fifa 2024").dataLancamento(jogoFromDB.getDataLancamento())
-					.preco(120.99).build();
-			em.merge(jogoToUpdate);
+			jogoFromDB.setNome("FIFA 24");
+			jogoFromDB.setPreco(129.99);
+			em.detach(jogoFromDB);
+			em.merge(jogoFromDB);
 			em.getTransaction().commit();
 			mergeSucesso = true;
 		} catch (IllegalStateException | RollbackException e) {
@@ -96,8 +106,8 @@ public class App {
 	private static void deletar(EntityManager em, Long id) {
 		boolean mergeSucesso = false;
 		try {
-			em.getTransaction().begin();
 			Jogo jogoFromDBToDelete = obterJogoById(em, id).get();
+			em.getTransaction().begin();
 			em.remove(jogoFromDBToDelete);
 			em.getTransaction().commit();
 			mergeSucesso = true;
@@ -108,7 +118,7 @@ public class App {
 		}
 
 		if (mergeSucesso)
-			log.info("Jogo '{}' removido no banco de dados!" , id);
+			log.info("Jogo '{}' removido no banco de dados!", id);
 	}
 
 }
