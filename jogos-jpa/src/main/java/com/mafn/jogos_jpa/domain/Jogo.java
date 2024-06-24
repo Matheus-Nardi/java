@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,10 @@ public class Jogo {
 	private String nome;
 	private Double preco;
 	private LocalDate dataLancamento;
+	
+	@ManyToOne
+	@JoinColumn(name = "desenvolvedor_id")
+	private Desenvolvedor desenvolvedor;
 	
 	public Jogo(Long id) {
 		

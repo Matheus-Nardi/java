@@ -28,7 +28,7 @@ public class AppJogo {
 		// atualizarJogo(em, 301L);
 		// deletar(em, 100L);
 		// obterJogos(em).forEach(System.out::println);
-		obterJogosByName(em, "a").forEach(System.out::println);
+		obterJogos(em).forEach(System.out::println);
 		;
 
 	}
