@@ -7,6 +7,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd" version="2.2">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>com.mafn.jogos_jpa.domain.Jogo</class>
         <class>com.mafn.jogos_jpa.domain.Desenvolvedor</class>
+        <class>com.mafn.jogos_jpa.domain.Genero</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/jogos_jpa"/>

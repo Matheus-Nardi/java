@@ -1,4 +1,4 @@
-package com.mafn.jogos_jpa.dao;
+package com.mafn.jogos_jpa.dao.interfaces;
 
 import java.util.List;
 import java.util.Optional;
