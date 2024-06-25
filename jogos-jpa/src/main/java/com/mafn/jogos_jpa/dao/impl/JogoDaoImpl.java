@@ -85,6 +85,8 @@ public class JogoDaoImpl implements JogoDAO {
 			Jogo jogoFromDB = obterById(id).get();
 			Jogo jogoToUpdate = Jogo.builder().id(jogoFromDB.getId()).nome(jogo.getNome())
 					.dataLancamento(jogo.getDataLancamento()).preco(jogo.getPreco())
+					.modo(jogo.getModo())
+					.generos(jogo.getGeneros())
 					.desenvolvedor(jogo.getDesenvolvedor()).build();
 			em.merge(jogoToUpdate);
 			tx.commit();

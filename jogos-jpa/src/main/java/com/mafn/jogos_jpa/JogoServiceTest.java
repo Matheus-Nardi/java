@@ -1,39 +1,40 @@
 package com.mafn.jogos_jpa;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
-import com.mafn.jogos_jpa.domain.Desenvolvedor;
+import com.mafn.jogos_jpa.domain.Genero;
 import com.mafn.jogos_jpa.domain.Jogo;
+import com.mafn.jogos_jpa.domain.Modo;
 import com.mafn.jogos_jpa.service.DesenvolvedorService;
+import com.mafn.jogos_jpa.service.GeneroService;
 import com.mafn.jogos_jpa.service.JogoService;
-import com.mafn.jogos_jpa.utils.JpaUtil;
-
-import jakarta.persistence.EntityManager;
 
 public class JogoServiceTest {
 	public static void main(String[] args) {
 		
-		EntityManager em = JpaUtil.getEntityManager();
+		
 		JogoService jogoService = new JogoService();
 		DesenvolvedorService desenvolvedorService = new DesenvolvedorService();
+		GeneroService generoService = new GeneroService();
 	
 		
-		Desenvolvedor desenvolvedor = Desenvolvedor.builder().nome("Mediatonic").urlSite("https://www.mediatonicgames.com/").build();
+		Jogo jogoUpdate = Jogo.builder()
+				.nome("FIFA 24")
+				.preco(129.99)
+				.dataLancamento(LocalDate.of(2024, 02, 15))
+				.desenvolvedor(desenvolvedorService.obterById(4L))
+				.modo(Modo.MULTIPLAYER)
+				.build();
 		
-		jogoService.obterTodos().forEach(System.out::println);
-		Jogo jogoToUpdate = Jogo.builder()
-		.nome("Fall Guys")
-		.dataLancamento(LocalDate.of(2020, 8, 04))
-		.desenvolvedor(desenvolvedor)
-		.preco(00.00)
-		.build();
+		Genero generoById = generoService.obterById(3L);
 		
-		jogoService.atualizar(jogoToUpdate, 251l);
-		System.out.println(jogoService.obterById(251L));
+		jogoUpdate.adiconarGenero(generoById);
+		
+		jogoService.atualizar(jogoUpdate, 301L);
 		
 		jogoService.fechar();
 		desenvolvedorService.fechar();
+		generoService.fechar();
 	}
 	
 	

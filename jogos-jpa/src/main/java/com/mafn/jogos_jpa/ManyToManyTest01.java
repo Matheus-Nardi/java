@@ -22,8 +22,8 @@ public class ManyToManyTest01 {
 		jogos.add(jogo1);
 		jogos.add(jogo2);
 		
-		Genero genero1 = new Genero("Ação");
-		Genero genero2 = new Genero("Aventura");
+		Genero genero1 = Genero.builder().nome("Ação").build();
+		Genero genero2 = Genero.builder().nome("Aventura").build();
 		generos.add(genero1);
 		generos.add(genero2);
 		
