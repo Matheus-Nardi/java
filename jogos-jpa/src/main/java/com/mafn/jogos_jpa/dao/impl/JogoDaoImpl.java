@@ -39,7 +39,7 @@ public class JogoDaoImpl implements JogoDAO {
 	public List<Jogo> filtrarJogoPorModo(Modo modo) {
 		String jpql = "SELECT j FROM Jogo j WHERE j.modo = :modo";
 		return em.createQuery(jpql, Jogo.class)
-				.setParameter("modo", modo.name())
+				.setParameter("modo", modo)
 				.getResultList();
 	}
 	public List<Jogo> filtrarJogoPorDesenvolvedor(String desenvolvedorNome) {
@@ -68,8 +68,8 @@ public class JogoDaoImpl implements JogoDAO {
 
 	public List<Jogo> oberByNome(String nome) {
 		String jpql = "SELECT j FROM Jogo j WHERE j.nome LIKE :nome";
-		TypedQuery<Jogo> query = em.createNamedQuery(jpql, Jogo.class);
-		query.setParameter("name", "%" + nome + "%");
+		TypedQuery<Jogo> query = em.createQuery(jpql, Jogo.class);
+		query.setParameter("nome", "%" + nome + "%");
 		return query.setMaxResults(10).setFirstResult(0).getResultList();
 	}
 

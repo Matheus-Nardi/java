@@ -53,14 +53,14 @@ public class JogoService {
 
 	public void filtros() {
 		System.out.println("----------------");
-		System.out.println("[1] filtrar por genero");
-		System.out.println("[2] filtrar por modo");
-		System.out.println("[3] filtrar por desenvolvedor");
+		System.out.println("[1] Filtrar por genero");
+		System.out.println("[2] Filtrar por modo");
+		System.out.println("[3] Filtrar por desenvolvedor");
 		Integer op = InputUtils.lerInt();
 		switch (op) {
-		case 1 -> filtrarJogoPorGenero();
-		case 2 -> filtrarJogoPorModo();
-		case 3 -> filtrarJogoPorDesenvolvedor();
+		case 1 -> filtrarJogoPorGenero().forEach(System.out::println);
+		case 2 -> filtrarJogoPorModo().forEach(System.out::println);
+		case 3 -> filtrarJogoPorDesenvolvedor().forEach(System.out::println);
 
 		default -> System.out.println("Escolha uma opção válida");
 		}
