@@ -15,6 +15,7 @@ A aplicação permite:
 - CRUD de gêneros
 - Um menu "infinito"
 - Opções de filtros de jogos
+- Tratamento de inputs
 
 ## Aprendizados
 Embora seja um projeto simples, foi desafiador determinar os relacionamentos entre as entidades e não confundir o mundo da Orientação a Objetos com o mundo de Entidade-Relacionamento.
