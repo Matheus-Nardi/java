@@ -82,15 +82,13 @@ public class GeneroDaoImpl implements GeneroDAO {
 
 	@Override
 	public void atualizar(Genero genero, Long id) {
-		log.info("Atualizando desenvolvedor do banco de dados.");
+		log.info("Atualizando genero do banco de dados.");
 		EntityTransaction tx = em.getTransaction();
 		try {
 			tx.begin();
-			Genero generoFromDB = obterById(id).get();
-			Genero generoToUpdate = Genero.builder().id(generoFromDB.getId()).nome(genero.getNome()).build();
-			em.merge(generoToUpdate);
+			em.merge(genero);
 			tx.commit();
-			log.info("Genero '{}' atualizado com sucesso!", generoToUpdate.getNome());
+			log.info("Genero '{}' atualizado com sucesso!", genero.getNome());
 		} catch (Exception e) {
 			em.getTransaction().rollback();
 			log.info("Erro ao atualizar o genero '{}' no banco de dados. {}", id, e.getMessage());

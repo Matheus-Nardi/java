@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import com.mafn.jogos_jpa.dao.interfaces.JogoDAO;
+import com.mafn.jogos_jpa.domain.Desenvolvedor;
 import com.mafn.jogos_jpa.domain.Jogo;
+import com.mafn.jogos_jpa.domain.Modo;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -26,6 +28,26 @@ public class JogoDaoImpl implements JogoDAO {
 		TypedQuery<Jogo> query = em.createQuery(jpql, Jogo.class);
 		return query.setMaxResults(10).setFirstResult(0).getResultList();
 	}
+	
+	public List<Jogo> filtrarJogoPorGenero(String generoNome) {
+		  String jpql = "SELECT j FROM Jogo j JOIN j.generos g WHERE g.nome LIKE :generoNome";
+		    return em.createQuery(jpql, Jogo.class)
+		             .setParameter("generoNome", "%" + generoNome + "%")
+		             .getResultList();
+	}
+	
+	public List<Jogo> filtrarJogoPorModo(Modo modo) {
+		String jpql = "SELECT j FROM Jogo j WHERE j.modo = :modo";
+		return em.createQuery(jpql, Jogo.class)
+				.setParameter("modo", modo.name())
+				.getResultList();
+	}
+	public List<Jogo> filtrarJogoPorDesenvolvedor(String desenvolvedorNome) {
+		String jpql = "SELECT j FROM Jogo j JOIN j.desenvolvedor d WHERE d.nome = :nome";
+		return em.createQuery(jpql, Jogo.class)
+				.setParameter("nome", "%"+desenvolvedorNome+"%")
+				.getResultList();
+	}
 
 	@Override
 	public Optional<Jogo> obterById(Long id) {
@@ -42,6 +64,13 @@ public class JogoDaoImpl implements JogoDAO {
 			return Optional.of(jogoById);
 
 		return Optional.empty();
+	}
+
+	public List<Jogo> oberByNome(String nome) {
+		String jpql = "SELECT j FROM Jogo j WHERE j.nome LIKE :nome";
+		TypedQuery<Jogo> query = em.createNamedQuery(jpql, Jogo.class);
+		query.setParameter("name", "%" + nome + "%");
+		return query.setMaxResults(10).setFirstResult(0).getResultList();
 	}
 
 	@Override
@@ -82,20 +111,13 @@ public class JogoDaoImpl implements JogoDAO {
 		EntityTransaction tx = em.getTransaction();
 		try {
 			tx.begin();
-			Jogo jogoFromDB = obterById(id).get();
-			Jogo jogoToUpdate = Jogo.builder().id(jogoFromDB.getId()).nome(jogo.getNome())
-					.dataLancamento(jogo.getDataLancamento()).preco(jogo.getPreco())
-					.modo(jogo.getModo())
-					.generos(jogo.getGeneros())
-					.desenvolvedor(jogo.getDesenvolvedor()).build();
-			em.merge(jogoToUpdate);
+			em.merge(jogo);
 			tx.commit();
-			log.info("Jogo '{}' atualizado com sucesso!", jogoToUpdate.getNome());
+			log.info("Jogo '{}' atualizado com sucesso!", jogo.getNome());
 		} catch (Exception e) {
 			em.getTransaction().rollback();
 			log.info("Erro ao atualizar o jogo '{}' no banco de dados. {}", id, e.getMessage());
 		}
-
 	}
 
 	@Override

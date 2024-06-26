@@ -27,6 +27,12 @@ public class DesenvolvedorDaoImpl implements DesenvolvedorDAO {
 		TypedQuery<Desenvolvedor> query = em.createQuery(jpql, Desenvolvedor.class);
 		return query.setMaxResults(10).setFirstResult(0).getResultList();
 	}
+	public List<Desenvolvedor> obterByNome(String nome) {
+		String jpql = "SELECT d FROM Desenvolvedor d WHERE  d.nome LIKE :nome";
+		TypedQuery<Desenvolvedor> query = em.createQuery(jpql, Desenvolvedor.class);
+		query.setParameter("nome", "%" + nome + "%");
+		return query.setMaxResults(10).setFirstResult(0).getResultList();
+	}
 
 	@Override
 	public Optional<Desenvolvedor> obterById(Long id) {
@@ -85,12 +91,9 @@ public class DesenvolvedorDaoImpl implements DesenvolvedorDAO {
 		EntityTransaction tx = em.getTransaction();
 		try {
 			tx.begin();
-			Desenvolvedor desenvolvedorFromDB = obterById(id).get();
-			Desenvolvedor desenvolvedorToUpdate = Desenvolvedor.builder().id(desenvolvedorFromDB.getId())
-					.nome(desenvolvedor.getNome()).urlSite(desenvolvedor.getUrlSite()).build();
-			em.merge(desenvolvedorToUpdate);
+			em.merge(desenvolvedor);
 			tx.commit();
-			log.info("Desenvolvedor '{}' atualizado com sucesso!", desenvolvedorToUpdate.getNome());
+			log.info("Desenvolvedor '{}' atualizado com sucesso!", desenvolvedor.getNome());
 		} catch (Exception e) {
 			em.getTransaction().rollback();
 			log.info("Erro ao atualizar o desenvolvedor '{}' no banco de dados. {}", id, e.getMessage());

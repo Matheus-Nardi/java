@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Builder
@@ -28,5 +29,6 @@ public class Desenvolvedor {
 	private String urlSite;
 	
 	@OneToMany(mappedBy = "desenvolvedor" , fetch = FetchType.LAZY)
+	@ToString.Exclude
 	private List<Jogo> jogos;
 }

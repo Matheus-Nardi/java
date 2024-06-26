@@ -33,11 +33,11 @@ public class Jogo {
 	private Double preco;
 	private LocalDate dataLancamento;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne()
 	@JoinColumn(name = "desenvolvedor_id")
 	private Desenvolvedor desenvolvedor;
 
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany()
 	private List<Genero> generos;
 	
 	@Enumerated(EnumType.STRING)
