@@ -3,7 +3,8 @@
 Este projeto visa aplicar conhecimentos em banco de dados e JPA, explorando o uso de ORM.
 
 ## UML
-![uml](https://github.com/Matheus-Nardi/java/assets/131494232/26383c83-eec5-4d60-9359-8de7926c1820)
+![umlAtualizado](https://github.com/Matheus-Nardi/java/assets/131494232/5430ea21-7725-474f-8083-751921e30a0f)
+
 
 ## Banco de Dados 
 ![image](https://github.com/Matheus-Nardi/java/assets/131494232/0483d42b-9f21-4646-a828-1b505a605723)
