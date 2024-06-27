@@ -1,6 +1,5 @@
 package com.mafn.jogos_jpa.service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,7 +7,6 @@ import com.mafn.jogos_jpa.dao.impl.DesenvolvedorDaoImpl;
 import com.mafn.jogos_jpa.dao.impl.JogoDaoImpl;
 import com.mafn.jogos_jpa.domain.Genero;
 import com.mafn.jogos_jpa.domain.Jogo;
-import com.mafn.jogos_jpa.domain.Modo;
 import com.mafn.jogos_jpa.utils.InputUtils;
 import com.mafn.jogos_jpa.utils.JpaUtil;
 
