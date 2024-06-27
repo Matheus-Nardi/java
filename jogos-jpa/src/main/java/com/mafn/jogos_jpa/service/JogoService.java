@@ -16,12 +16,10 @@ public class JogoService {
 	private static final Scanner SCAN = new Scanner(System.in);
 	private EntityManager em;
 	private JogoDaoImpl jogoDaoImpl;
-	private DesenvolvedorDaoImpl desenvolvedorDaoImpl;
-
+	
 	public JogoService() {
 		this.em = JpaUtil.getEntityManager();
 		this.jogoDaoImpl = new JogoDaoImpl(em);
-		this.desenvolvedorDaoImpl = new DesenvolvedorDaoImpl(em);
 	}
 
 	public void menuJogo() {
@@ -54,19 +52,28 @@ public class JogoService {
 		System.out.println("[1] Filtrar por genero");
 		System.out.println("[2] Filtrar por modo");
 		System.out.println("[3] Filtrar por desenvolvedor");
+		System.out.println("[4] Filtrar por preço maior que");
 		Integer op = InputUtils.lerInt();
 		switch (op) {
 		case 1 -> filtrarJogoPorGenero().forEach(System.out::println);
 		case 2 -> filtrarJogoPorModo().forEach(System.out::println);
 		case 3 -> filtrarJogoPorDesenvolvedor().forEach(System.out::println);
+		case 4 -> consultarPreco().forEach(System.out::println);
 
 		default -> System.out.println("Escolha uma opção válida");
 		}
 
 	}
+	
 
 	public List<Jogo> obterTodos() {
 		return jogoDaoImpl.obterTodos();
+	}
+	public List<Jogo> consultarPreco(){
+		System.out.println("Informe um preço: ");
+		 List<Jogo> consultarPreco = jogoDaoImpl.consultarPreco("jogosPrecoMaiorQue", "preco" , InputUtils.lerDouble());
+		 System.out.println("Quantidade encontrada: " + consultarPreco.size());
+		 return consultarPreco;
 	}
 
 	public Jogo obterById() {

@@ -125,4 +125,13 @@ public class JogoDaoImpl implements JogoDAO {
 		em.close();
 	}
 
+	@Override
+	public List<Jogo> consultarPreco(String nomeConsulta, Object... params) {
+		TypedQuery<Jogo> query = em.createNamedQuery(nomeConsulta, Jogo.class);
+		for (int i = 0; i < params.length; i+=2) {
+			query.setParameter(params[i].toString(), params[i+1]);
+		}
+		return query.getResultList();
+	}
+
 }

@@ -13,4 +13,6 @@ public interface JogoDAO {
 	public void deletar(Long id);
 	public void atualizar(Jogo jogo , Long id);
 	public void fechar();
+	
+	public List<Jogo> consultarPreco(String nomeConsulta ,Object...params);
 }

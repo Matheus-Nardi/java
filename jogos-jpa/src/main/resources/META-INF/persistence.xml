@@ -5,6 +5,8 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd" version="2.2">
 
     <persistence-unit name="jogos_jpa">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        
+        <mapping-file>META-INF/consultas.xml</mapping-file>
         <class>com.mafn.jogos_jpa.domain.Jogo</class>
         <class>com.mafn.jogos_jpa.domain.Desenvolvedor</class>
         <class>com.mafn.jogos_jpa.domain.Genero</class>
