@@ -45,8 +45,8 @@ public class UserResource {
 	public Response createUser(CreateUserRequest userRequest) {
 		Set<ConstraintViolation<CreateUserRequest>> violations = validator.validate(userRequest);
 		if (!violations.isEmpty()) {
-			ResponseError responseError = ResponseError.createFromValidation(violations);
-			return Response.status(400).entity(responseError).build();
+			return ResponseError.createFromValidation(violations).withStatusCode(ResponseError.UNPROCESSABLE_ENTITY_STATUS);
+			 
 		}
 		User user = new User();
 		String name = userRequest.getName();
@@ -55,7 +55,9 @@ public class UserResource {
 		user.setName(nameFormat);
 		user.setAge(userRequest.getAge());
 		repository.persist(user);
-		return Response.ok(userRequest).build();
+		return Response.status(Response.Status.CREATED.getStatusCode())
+				.entity(userRequest)
+				.build();
 	}
 
 	@GET
@@ -79,7 +81,7 @@ public class UserResource {
 		User userById = repository.findById(id);
 		if (userById != null) {
 			repository.delete(userById);
-			return Response.ok().build();
+			return Response.noContent().build();
 		}
 
 		return Response.status(Status.NOT_FOUND).build();
@@ -94,7 +96,7 @@ public class UserResource {
 		if (userFromDB != null) {
 			userFromDB.setName(userData.getName());
 			userFromDB.setAge(userData.getAge());
-			return Response.ok().build();
+			return Response.noContent().build();
 		}
 		return Response.status(Status.NOT_FOUND).build();
 	}

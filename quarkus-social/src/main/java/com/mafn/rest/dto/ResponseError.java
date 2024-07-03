@@ -6,8 +6,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import jakarta.validation.ConstraintViolation;
+import jakarta.ws.rs.core.Response;
+import lombok.Data;
 
+@Data
 public class ResponseError {
+	public static final int UNPROCESSABLE_ENTITY_STATUS = 422;
 	private String message;
 	private Collection<FieldError> invalidInputs;
 
@@ -25,20 +29,8 @@ public class ResponseError {
 			return new ResponseError(messsage, invalidInputs);
 	}
 
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public Collection<FieldError> getInvalidInputs() {
-		return invalidInputs;
-	}
-
-	public void setInvalidInputs(Collection<FieldError> invalidInputs) {
-		this.invalidInputs = invalidInputs;
+	public Response withStatusCode(int code) {
+		return Response.status(code).entity(this).build();
 	}
 
 }
