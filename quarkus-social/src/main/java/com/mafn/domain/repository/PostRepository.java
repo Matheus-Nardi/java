@@ -10,9 +10,4 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class PostRepository implements PanacheRepository<Post> {
 
-	public List<Post> findPostByUserId(Long userId){
-		return  findAll().stream()
-					.filter(post -> post.getUser().getId().equals(userId))
-					.toList();
-	}
 }

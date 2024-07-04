@@ -18,4 +18,10 @@ CREATE TABLE IF NOT EXISTS Posts
     user_id bigint NOT NULL REFERENCES Users(id)
     PRIMARY KEY (id)
 );
+
+CREATE TABLE IF NOT EXISTS FOLLOWERS(
+	id bigserial not null primary key,
+	user_id bigint not null references users(id),
+	follower_id bigint not null references users(id)
+);
 END;

@@ -10,6 +10,7 @@ import com.mafn.domain.model.User;
 import com.mafn.domain.repository.PostRepository;
 import com.mafn.domain.repository.UserRepository;
 import com.mafn.rest.dto.CreatePostRequest;
+import com.mafn.rest.dto.PostResponse;
 import com.mafn.rest.dto.ResponseError;
 
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
@@ -68,8 +69,13 @@ public class PostResource {
 			return Response.status(Response.Status.NOT_FOUND).build();
 		}
 		
-		List<Post> postByUserId = postRepository.findPostByUserId(userId);
+		List<Post> postByUserId = postRepository.find("user ", user).list();
+		
+		List<PostResponse> postResponse = postByUserId.stream()
+				.map(PostResponse::fromEntity)
+				.toList()
+				.reversed();
 		 
-		return Response.ok(postByUserId).build();
+		return Response.ok(postResponse).build();
 	}
 }
